@@ -25,30 +25,34 @@ Or install it yourself as:
 ## Usage
 You will need a hash object and the key name.
 
+```
 data = {
-      :l1 => {
-        :l2 => {
-          :l3 => {
-            :l4a => "Level 4",
-            :l4b => {
-              :l5a => false,
-              :l5b => {
-                :l6 => ["apple", "orange"]
-              }
-            } 
+  :l1 => {
+    :l2 => {
+      :l3 => {
+        :l4a => "Level 4",
+        :l4b => {
+          :l5a => false,
+          :l5b => {
+            :l6 => ["apple", "orange"]
           }
-        }
-      },
-      :l7 => true
+        } 
+      }
     }
+  },
+  :l7 => true
+}
+```
 
-data.dig_deep(:l4a)  // "Level 4"
-data.dig_deep(:l5a)  // false
-data.dig_deep(:xyz)  // nil
+```data.dig_deep(:l4a)  // "Level 4"```
+
+```data.dig_deep(:l5a)  // false```
+
+```data.dig_deep(:xyz)  // nil```
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `rspec spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
