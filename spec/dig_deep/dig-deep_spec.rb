@@ -11,10 +11,12 @@ RSpec.describe DigDeep do
                 :l6 => ["apple", "orange"]
               }
             } 
-          }
-        }
+          },
+          :email => "email_1@exapmle.com"
+        },
+        :email => "email_2@exapmle.com"
       },
-      :l7 => true
+      :l1a => true
     }
   }
 
@@ -35,7 +37,7 @@ RSpec.describe DigDeep do
   end
 
   it "dig_deep for truthy success" do
-    expect(data.dig_deep(:l7)).to eq true
+    expect(data.dig_deep(:l1a)).to eq true
   end
 
   it "dig_deep for hash success" do
@@ -44,6 +46,10 @@ RSpec.describe DigDeep do
 
   it "dig_deep for array success" do
     expect(data.dig_deep(:l6)).to eq ["apple", "orange"]
+  end
+
+  it "dig_deep returns first key/value" do
+    expect(data.dig_deep(:email)).to eq "email_2@exapmle.com"
   end
 
   it "dig_deep not found returns nil" do
