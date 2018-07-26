@@ -44,11 +44,15 @@ data = {
 }
 ```
 
-```data.dig_deep(:l4a)  // "Level 4"```
+```
+require 'dig-deep'
 
-```data.dig_deep(:l5a)  // false```
+data.dig_deep(:l4a)  // "Level 4"
 
-```data.dig_deep(:xyz)  // nil```
+data.dig_deep(:l5a)  // false
+
+data.dig_deep(:xyz)  // nil
+```
 
 ## Development
 
