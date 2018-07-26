@@ -173,12 +173,38 @@ RSpec.describe DigDeep do
     }
   }
 
+  let(:readme_example){
+    {
+      :l1 => {
+        :l2 => {
+          :l3 => {
+            :l4a => "Level 4",
+            :l4b => {
+              :l5a => false,
+              :l5b => {
+                :l6 => ["apple", "orange"]
+              }
+            } 
+          }
+        }
+      },
+      :l7 => true
+    }
+  }
+
+
   it "has a version number" do
     expect(DigDeep::VERSION).not_to be nil
   end
 
   it "dig_deep for a hash" do
     expect(case1.is_a? Hash).to be true
+  end
+
+  it "Success examples shown on Readme" do 
+    expect(readme_example.dig_deep(:l4a)).to eq "Level 4"
+    expect(readme_example.dig_deep(:l5a)).to be false
+    expect(readme_example.dig_deep(:xyz)).to be nil
   end
 
   it "dig_deep for string in case 1 success" do
