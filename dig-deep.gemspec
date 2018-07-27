@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Henry Szeto"]
   spec.email         = ["henryszeto@gmail.com"]
 
-  spec.summary       = %q{Dig into a nested Hash and return the first value by the key.}
-  spec.description   = %q{Give a hash key, DigDetect will recursively search in the hash and return the first matching key/value.}
+  spec.summary       = %q{Dig into a nested Hash and return all values by the key.}
+  spec.description   = %q{Give a hash key, DigDeep will recursively search in the hash and return all values.}
   spec.homepage      = "https://github.com/hszeto/dig-deep"
   spec.license       = "MIT"
 

@@ -2,15 +2,17 @@ require "dig_deep/version"
 require "json"
 
 module DigDeep
-  Hash.class_eval do
-    def dig_deep(target)
-      results = dig_for(self, target)
+  def dig_deep(target)
+    results = dig_for(self, target)
 
-      return nil if results.empty?
-      return results[0] if results.length === 1
-      return results
-    end
+    return nil if results.empty?
+    return results[0] if results.length === 1
+    return results
   end
+end
+
+class Hash
+  include DigDeep
 end
 
 
