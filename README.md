@@ -1,6 +1,6 @@
 # DigDeep
 
-DigDeep will look up key/value pairs in a nested hash by a given key. It will recursively dig each nested object and return all matching key/value pairs.
+DigDeep will look up key/value pairs in a nested hash by a given key. It will recursively dig each nested object and return all matching key/values.
 
 Ruby's dig method can perform similar tasks, but you need to specify the path to the target key.
 
