@@ -1,8 +1,8 @@
 # DigDeep
 
-DigDeep will dig up a value in a nested hash by the key. It will recursively dig each nested object until the first matching key/value is found.
+DigDeep will look up key/value pairs in a nested hash by a given key. It will recursively dig each nested object and return all matching key/value pairs.
 
-Ruby's dig method can accomplish the same thing, but you need to specify the path to the target key.
+Ruby's dig method can perform similar tasks, but you need to specify the path to the target key.
 
 With this gem, you will only need to specify the target key and it will do the digging.
 
@@ -23,8 +23,58 @@ Or install it yourself as:
     $ gem install dig-deep
 
 ## Usage
-You will need a hash object and the key name.
+#### Example 1:
+Given the following hash:
+```
+data = {
+  a: {
+    b: {
+      c: "abc"
+    }
+  }
+}
+```
+Ruby `.dig`:
+```
+data.dig(:a, :b, :c)   // "abc"
+```
+With DigDeep:
+```
+require 'dig-deep'
 
+data.dig_deep(:c)      // "abc"
+```
+
+#### Example 2:
+Dig up all `:email`
+```
+data = {
+  contacts: [{
+    name: "John",
+    email: "john@example.com"
+  }, {
+    name: "Mary",
+    email: "mary@example.com"
+  }],
+  work: {
+    contacts: [{
+      name: "ACME Corp.",
+      email: "acme@example.com"
+    }, {
+      name: "Asdf Inc.",
+      email: "asdf@example.com"
+    }]
+  }
+}
+```
+```
+require 'dig-deep'
+
+data.dig_deep(:email)  // ["john@example.com", "mary@example.com", "acme@example.com", "asdf@example.com"]
+```
+
+#### Example 3:
+Object with boolean, string, array...
 ```
 data = {
   :l1 => {
@@ -40,18 +90,24 @@ data = {
       }
     }
   },
-  :l7 => true
+  :l7 => true,
+  :l8 => {
+    :l9 => 9876
+  }
 }
 ```
-
 ```
 require 'dig-deep'
 
-data.dig_deep(:l4a)  // "Level 4"
+data.dig_deep(:l4a)   // "Level 4"
 
-data.dig_deep(:l5a)  // false
+data.dig_deep(:l5a)   // false
 
-data.dig_deep(:xyz)  // nil
+data.dig_deep(:l6)    // ["apple", "orange"]
+
+data.dig_deep(:l9)    // 9876
+
+data.dig_deep(:xyz)   // nil   (returns nil when key is not found)
 ```
 
 ## Development
