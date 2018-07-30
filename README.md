@@ -46,7 +46,7 @@ data.dig_deep(:c)      // "abc"
 ```
 
 #### Example 2:
-Dig up all `:email`
+Dig up all `:email` from arrays of objects
 ```
 data = {
   contacts: [{
