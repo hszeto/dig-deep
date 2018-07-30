@@ -45,7 +45,7 @@ def drill(obj, target)
 end
 
 def is_object?(obj)
-  (obj.class == Hash || obj.class == Array) ? true : false
+  obj.class == Hash || obj.class == Array
 end
 
 def string_to_array(val)
