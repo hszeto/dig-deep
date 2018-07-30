@@ -3,11 +3,9 @@ require "json"
 
 module DigDeep
   def dig_deep(target)
-    results = dig_for(self, target)
+    results = serialize_for(self, target)
 
-    return nil if results.empty?
-    return results[0] if results.length === 1
-    return results
+    results.size <= 1 ? results[0] : results
   end
 end
 
@@ -15,10 +13,9 @@ class Hash
   include DigDeep
 end
 
-
 private
 
-def dig_for(obj, target)
+def serialize_for(obj, target)
   drill(obj, target).map do |m|
     string_to_array(m) ? string_to_array(m) : m
   end.compact
@@ -26,21 +23,19 @@ end
 
 def drill(obj, target)
   if is_object?(obj)
-    if (obj.is_a?(Hash) && obj.key?(target))
-      acc = obj[target].is_a?(Array) ? ["#{obj[target]}"] : [ obj[target] ]
-    end
+    acc = (obj.is_a?(Hash) && obj.key?(target)) \
+      ? obj[target].is_a?(Array) ? ["#{obj[target]}"] : [ obj[target] ] \
+      : []
 
-    obj.reduce(acc ||= []) do |acc, val|
-      if (val.is_a?(Hash) && val.key?(target))
-        acc << (val[target].is_a?(Array) ? "#{val[target]}" : val[target])
-      elsif val.is_a?(Array)
-        acc << val.reduce([]){|acc, v| drill(v, target) if is_object?(v) }
-      elsif val.is_a?(Hash)
-        acc << val.values.reduce([]){|acc,v| drill(v,target)}
-      else
-        acc
-      end
-    end.compact.flatten(1)
+    obj.reduce(acc) do |acc, val|
+      val.is_a?(Hash) \
+        ? ( val.key?(target) \
+              ? acc << (val[target].is_a?(Array) ? "#{val[target]}" : val[target]) \
+              : acc << val.values.reduce([]){|acc,v| drill(v,target)} )
+        : ( val.is_a?(Array) \
+              ? acc << val.reduce([]){|acc, v| drill(v, target) if is_object?(v) } \
+              : acc )
+    end.flatten(1)
   end
 end
 
