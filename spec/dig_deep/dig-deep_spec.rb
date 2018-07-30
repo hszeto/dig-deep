@@ -173,7 +173,38 @@ RSpec.describe DigDeep do
     }
   }
 
-  let(:readme_example){
+  let(:readme_example1){
+    {
+      a: {
+        b: {
+          c: "abc"
+        }
+      }
+    }
+  }
+
+  let(:readme_example2){
+    {
+      contacts: [{
+        name: "John",
+        email: "john@example.com"
+      }, {
+        name: "Mary",
+        email: "mary@example.com"
+      }],
+      work: {
+        contacts: [{
+          name: "ACME Corp.",
+          email: "acme@example.com"
+        }, {
+          name: "Asdf Inc.",
+          email: "asdf@example.com"
+        }]
+      }
+    }
+  }
+
+  let(:readme_example3){
     {
       :l1 => {
         :l2 => {
@@ -188,7 +219,10 @@ RSpec.describe DigDeep do
           }
         }
       },
-      :l7 => true
+      :l7 => true,
+      :l8 => {
+        :l9 => 9876
+      }
     }
   }
 
@@ -199,12 +233,6 @@ RSpec.describe DigDeep do
 
   it "dig_deep for a hash" do
     expect(case1.is_a? Hash).to be true
-  end
-
-  it "Success examples shown on Readme" do 
-    expect(readme_example.dig_deep(:l4a)).to eq "Level 4"
-    expect(readme_example.dig_deep(:l5a)).to be false
-    expect(readme_example.dig_deep(:xyz)).to be nil
   end
 
   it "dig_deep for string in case 1 success" do
@@ -300,5 +328,22 @@ RSpec.describe DigDeep do
 
   it 'client_with_many_addresses' do
     expect(client_with_many_addresses.dig_deep(:latitude)).to eq [37.422, 37.3318]
+  end
+
+  it "Success example1 shown on Readme" do
+    expect(readme_example1.dig_deep(:c)).to eq "abc"
+  end
+
+  it "Success example2 shown on Readme" do
+    expect(readme_example2.dig_deep(:email)).to eq \
+      ["john@example.com", "mary@example.com", "acme@example.com", "asdf@example.com"]
+  end
+
+  it "Success example3 shown on Readme" do
+    expect(readme_example3.dig_deep(:l4a)).to eq "Level 4"
+    expect(readme_example3.dig_deep(:l5a)).to be false
+    expect(readme_example3.dig_deep(:l6) ).to eq ["apple", "orange"]
+    expect(readme_example3.dig_deep(:l9) ).to be 9876
+    expect(readme_example3.dig_deep(:xyz)).to be nil
   end
 end
