@@ -3,7 +3,9 @@ require "json"
 
 module DigDeep
   def dig_deep(target)
-    results = serialize_for(self, target)
+    symbolized_obj = JSON.parse(JSON[self], symbolize_names: true)
+
+    results = serialize_for(symbolized_obj, target.to_sym)
 
     results.size <= 1 ? results[0] : results
   end
