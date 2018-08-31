@@ -140,6 +140,15 @@ RSpec.describe DigDeep do
     }
   }
 
+  let(:case11){
+    {
+      :email  => "email+1@example.com",
+      :level1 => {
+        "email" => "email+2@example.com"
+      }
+    }
+  }
+
   let(:client_with_many_addresses){
     {
       name: {
@@ -305,6 +314,14 @@ RSpec.describe DigDeep do
 
   it "returns nil success" do
     expect(case10.dig_deep(:l2b)).to eq nil
+  end
+
+  it "can dig_deep by symbol" do
+    expect(case11.dig_deep(:email) ).to eq ["email+1@example.com", "email+2@example.com"]
+  end
+
+  it "can dig_deep by string" do
+    expect(case11.dig_deep('email')).to eq ["email+1@example.com", "email+2@example.com"]
   end
 
   it "dig_deep on empty hash returns nil" do

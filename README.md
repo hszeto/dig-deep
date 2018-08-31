@@ -110,6 +110,24 @@ data.dig_deep(:l9)    // 9876
 data.dig_deep(:xyz)   // nil   (returns nil when key is not found)
 ```
 
+#### Example 4:
+Object with symbol and string keys
+```
+data = {
+  :email  => "email+1@example.com",
+  :level1 => {
+    "email" => "email+2@example.com"
+  }
+}
+```
+```
+require 'dig-deep'
+
+data.dig_deep(:email)   // ["email+1@example.com", "email+2@example.com"]
+
+data.dig_deep('email')  // ["email+1@example.com", "email+2@example.com"]
+```
+
 ## Contributing
 #### Bug reports and pull requests are welcome!
 Fork it, create your new branch, push and create a pull request.
@@ -117,7 +135,3 @@ Fork it, create your new branch, push and create a pull request.
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
-
-## Code of Conduct
-
-Everyone interacting in the DigDeep project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/dig-deep/blob/master/CODE_OF_CONDUCT.md).
