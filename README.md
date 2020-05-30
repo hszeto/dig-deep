@@ -22,6 +22,11 @@ Or install it yourself as:
 
     $ gem install dig-deep
 
+## Test
+```sh
+$ bundle exec rspec spec
+```
+
 ## Usage
 #### Example 1:
 Given the following hash:
