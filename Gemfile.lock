@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    dig-deep (0.3.0)
+    dig-deep (0.4.0)
 
 GEM
   remote: https://rubygems.org/
@@ -26,10 +26,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 1.16)
+  bundler (>= 2.2.10)
   dig-deep!
   rake (~> 12.3.3)
   rspec (~> 3.0)
 
 BUNDLED WITH
-   1.16.3
+   2.2.21
