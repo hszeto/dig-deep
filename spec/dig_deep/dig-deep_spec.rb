@@ -363,4 +363,12 @@ RSpec.describe DigDeep do
     expect(readme_example3.dig_deep(:l9) ).to be 9876
     expect(readme_example3.dig_deep(:xyz)).to be nil
   end
+
+  it "returns nil when target key exists but has explicit nil value" do
+    expect({ user: { email: nil } }.dig_deep(:email)).to eq nil
+  end
+
+  it "dig_deep on nested empty hashes or arrays returns nil" do
+    expect({ a: {}, b: [] }.dig_deep(:anything)).to eq nil
+  end
 end
